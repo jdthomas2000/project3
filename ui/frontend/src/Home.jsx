@@ -20,18 +20,18 @@ export default function Home({
   zoom,
   setZoom,
 }) {
-  const [airportList, setAirportList] = useState([]);
+  // const [airportList, setAirportList] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/airports")
-      .then((res) => res.json())
-      .then((data) => {
-        setAirportList(data);
-      })
-      .catch((err) => console.error("Fetch error:", err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/airports")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setAirportList(data);
+  //     })
+  //     .catch((err) => console.error("Fetch error:", err));
+  // }, []);
 
-  if (airportList.length === 0) return <p>Loading airports...</p>;
+  // if (airportList.length === 0) return <p>Loading airports...</p>;
   return (
     <>
       <div className="banner">
@@ -51,7 +51,7 @@ export default function Home({
         <h2>Author:</h2>
         <h3>Jacob Thomas</h3>
       </div>
-      <div>
+      {/* <div>
         <h1>Airport Info</h1>
         {airportList.map((airport) => {
           return (
@@ -60,7 +60,7 @@ export default function Home({
             </p>
           );
         })}
-      </div>
+      </div> */}
       <div className="center">
         <Search countries={countries}></Search>
         <Regions

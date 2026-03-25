@@ -3,6 +3,9 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
+
+const path = require("path");
+
 module.exports = {
   development: {
     client: "pg",
@@ -14,10 +17,10 @@ module.exports = {
       database: "dockerws",
     },
     seeds: {
-      directory: "../db/seeds",
+      directory: path.resolve(__dirname, "seeds"),
     },
     migrations: {
-      directory: "../../db/migrations",
+      directory: path.resolve(__dirname, "migrations"),
     },
   },
 

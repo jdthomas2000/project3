@@ -2,30 +2,43 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+const { parse } = require("csv-parse/sync");
+const { stringify } = require("csv-stringify/sync");
+const fs = require("fs");
+const path = require("path");
+
 exports.seed = async function (knex) {
-  // Deletes ALL existing entries
-  await knex("airport").del();
-  await knex("airport").insert([
-    {
-      id: 1,
-      name: "LAX",
-      state: "CA",
-      city: "Los Angeles",
-      size_acres: "3500",
-    },
-    {
-      id: 2,
-      name: "SFO",
-      state: "CA",
-      city: "San Fransico",
-      size_acres: "5207",
-    },
-    {
-      id: 3,
-      name: "SMF",
-      state: "CA",
-      city: "Sacramento",
-      size_acres: "6000",
-    },
-  ]);
+  await knex("airports").del();
+
+  const myPath = path.join(__dirname, "../data/airports.csv");
+  let airportData = [];
+
+  const content = fs.readFileSync(myPath, "utf-8");
+
+  airportData = parse(content, {
+    columns: true,
+    skip_empty_lines: true,
+    trim: true,
+  });
+
+  const filteredAirportData = airportData
+    .filter(
+      (airport) =>
+        airport.type === "large_airport" || airport.type === "medium_airport",
+    )
+    .map((airport) => ({
+      name: airport.name,
+      iso_country: airport.iso_country,
+      iata_code: airport.iata_code,
+      elevation_ft: parseInt(airport.elevation_ft) || 0,
+      latitude_deg: parseFloat(airport.latitude_deg),
+      longitude_deg: parseFloat(airport.longitude_deg),
+    }));
+
+  if (filteredAirportData.length > 0) {
+    await knex.batchInsert("airports", filteredAirportData, 500);
+    console.log(`Seeded ${filteredAirportData.length} airports!`);
+  } else {
+    console.log("No airports found matching the criteria.");
+  }
 };

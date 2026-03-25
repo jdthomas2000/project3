@@ -20,7 +20,7 @@ app.get("/", async (req, res) => {
 
 app.get("/airports", async (req, res) => {
   try {
-    const result = await db("airport").select("*");
+    const result = await db("airports").select("*");
     return res.status(200).json(result);
   } catch (err) {
     res.status(500).send(err);
