@@ -16,6 +16,7 @@ import Gallery from "./Gallery";
 export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   const [countryData, setCountryData] = useState(null);
   const [countryCode, setCountryCode] = useState(null);
+  const [airports, setAirports] = useState([]);
 
   const { countryName } = useParams();
 
@@ -32,6 +33,15 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
         }
       });
   }, [countryName, setCoords, setZoom]);
+
+  useEffect(() => {
+    if (!countryCode) return;
+    fetch(`http://localhost:3000/airports/${countryCode}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAirports(data);
+      });
+  }, [countryCode]);
 
   if (!countryData) return <h1>No Deets Avail</h1>;
 
@@ -89,6 +99,12 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
               ))
             : "N/A"}
         </ul>
+        <div>
+          <strong>Airports</strong>
+          {airports.map((airport) => {
+            return <p>{airport.name}</p>;
+          })}
+        </div>
       </div>
       <div className="flags">
         <div className="visual-box">
@@ -114,7 +130,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
         </div>
       </div>
 
-      <Gallery query={`${countryData.name.common} scenery`}></Gallery>
+      {/* <Gallery query={`${countryData.name.common} scenery`}></Gallery> */}
     </>
   );
 }
