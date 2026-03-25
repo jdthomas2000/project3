@@ -1,0 +1,47 @@
+
+services:
+  ui:
+    build: ui/frontend
+    command: npm run dev
+    ports: 
+      - '8080:5173'
+    depends_on:
+      - database
+    volumes:
+      - ./ui/frontend:/src/App/ui/frontend 
+      - /src/App/ui/frontend/node_modules    
+
+  api:
+    build: 
+      context: .            
+      dockerfile: api/Dockerfile
+    command:  npm start
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=database
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME} 
+
+    depends_on:
+      - database
+    restart: on-failure
+   
+
+  database:
+    image: postgres:latest
+    environment:
+      - DB_HOST=database
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME} 
+    ports:
+      - "5431:5432"
+    volumes:
+  
+      - postgres_data:/var/lib/postgresql
+
+
+volumes:
+  postgres_data:
