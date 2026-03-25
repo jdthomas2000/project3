@@ -392,3 +392,7 @@ a {
   height: 100%;
   object-fit: cover;
 }
+.airplane-marker {
+  background: none !important;
+  border: none !important;
+}

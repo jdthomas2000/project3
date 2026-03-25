@@ -17,6 +17,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   const [countryData, setCountryData] = useState(null);
   const [countryCode, setCountryCode] = useState(null);
   const [airports, setAirports] = useState([]);
+  // const [latLongArray, setLatLongArray] = useState(null)
 
   const { countryName } = useParams();
 
@@ -43,13 +44,16 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
       });
   }, [countryCode]);
 
-  if (!countryData) return <h1>No Deets Avail</h1>;
+  const latLongArray = airports.map((airport) => ({
+    lat: airport.latitude_deg,
+    lng: airport.longitude_deg,
+  }));
 
-  //fetch using countrycode to my db with all of the airport data
+  if (!countryData) return <h1>No Deets Avail</h1>;
 
   return (
     <>
-      <WorldMap coords={coords} zoom={zoom}></WorldMap>
+      <WorldMap coords={coords} zoom={zoom} markers={latLongArray}></WorldMap>
       <div className="banner">
         <Link
           to="/"
@@ -102,7 +106,16 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
         <div>
           <strong>Airports</strong>
           {airports.map((airport) => {
-            return <p>{airport.name}</p>;
+            return (
+              <>
+                <p>Airport Name: {airport.name}</p>
+                <p>Country Iso Code: {airport.iso_country}</p>
+                <p>IATA Code: {airport.iata_code}</p>
+                <p>Elevation: {airport.elevation_ft} ft</p>
+                <p>Lat: {airport.latitude_deg}</p>
+                <p>Long: {airport.longitude_deg}</p>
+              </>
+            );
           })}
         </div>
       </div>
