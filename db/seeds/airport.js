@@ -22,10 +22,7 @@ exports.seed = async function (knex) {
   });
 
   const filteredAirportData = airportData
-    .filter(
-      (airport) =>
-        airport.type === "large_airport" || airport.type === "medium_airport",
-    )
+    .filter((airport) => airport.type === "large_airport")
     .map((airport) => ({
       name: airport.name,
       iso_country: airport.iso_country,
