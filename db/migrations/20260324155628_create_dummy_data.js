@@ -14,6 +14,7 @@ exports.up = function (knex) {
 
     table.decimal("latitude_deg");
     table.decimal("longitude_deg");
+    table.string("wikipedia_link");
     table.timestamps(true, true);
   });
 };

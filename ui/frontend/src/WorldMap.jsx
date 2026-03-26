@@ -30,6 +30,7 @@ export default function WorldMap({ coords, zoom, markers }) {
           maxZoom: 19,
           attribution:
             '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          paddingBottomRight: [400, 0],
         })
         .addTo(mapInstanceRef.current);
       markerLayerRef.current.addTo(mapInstanceRef.current);
@@ -51,6 +52,9 @@ export default function WorldMap({ coords, zoom, markers }) {
           if (mark.lat && mark.lng) {
             leaflet
               .marker([mark.lat, mark.lng], { icon: icon })
+              .bindPopup(
+                `<a href="${mark.wikipedia_link}" target="_blank" rel="noopener noreferrer">${mark.name}</a>`,
+              )
               .addTo(markerLayerRef.current);
           }
         });

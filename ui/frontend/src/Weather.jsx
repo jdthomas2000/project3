@@ -152,15 +152,16 @@ export const Weather = ({ coords }) => {
   };
   return (
     <>
-      <p>
+      {/* <p>
         <strong>Current Weather</strong>
-      </p>
-      <div className="minor-stat">
-        <p className="major-stat-label">Temperature</p>
-        <p className="major-current-temp">
-          {weatherData.current.temperature_2m} °F
+      </p> */}
+      <div className="currTemp">
+        <p className="major-stat-label">
+          {" "}
+          Current Temp: {weatherData.current.temperature_2m} °F
         </p>
       </div>
+      {weatherType()}
       <div className="minor-stat-wrapper">
         <div className="minor-stat">
           <p className="minor-stat-label">Humidity</p>
@@ -174,12 +175,6 @@ export const Weather = ({ coords }) => {
             {weatherData.current.wind_speed_10m} mph
           </p>
         </div>
-      </div>
-      <p>
-        <strong>Daily:</strong>
-      </p>
-      {weatherType()}
-      <div className="minor-stat-wrapper">
         <div className="minor-stat">
           <p className="minor-stat-label">High</p>
           <p className="current-temp">

@@ -22,7 +22,9 @@ exports.seed = async function (knex) {
   });
 
   const filteredAirportData = airportData
-    .filter((airport) => airport.type === "large_airport")
+    .filter(
+      (airport) => airport.type === "large_airport" && airport.wikipedia_link,
+    )
     .map((airport) => ({
       name: airport.name,
       iso_country: airport.iso_country,
@@ -30,6 +32,7 @@ exports.seed = async function (knex) {
       elevation_ft: parseInt(airport.elevation_ft) || 0,
       latitude_deg: parseFloat(airport.latitude_deg),
       longitude_deg: parseFloat(airport.longitude_deg),
+      wikipedia_link: airport.wikipedia_link,
     }));
 
   if (filteredAirportData.length > 0) {
