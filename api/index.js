@@ -37,6 +37,44 @@ app.get("/airports/:country", async (req, res) => {
   }
 });
 
+app.post("/airports/:country", async (req, res) => {
+  try {
+    await db("airports").insert(req.body);
+
+    const result = await db("airports")
+      .select("*")
+      .where("iso_country", "=", req.params.country.toUpperCase());
+
+    if (!result) return "loading results";
+
+    return res.status(201).json({ Message_sent: result });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.delete("/airports/:country", async (req, res) => {
+  try {
+    await db("airports").select("*").where("name", "=", req.body.name).del();
+
+    return res.status(201).json({ Airport_deleted: req.body.name });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.patch("/airports/:country", async (req, res) => {
+  const { id, ...updateData } = req.body;
+  try {
+    await db("airports").where("name", "=", req.body.name).update(updateData);
+
+    return res.status(201).json({ Airport_updated: req.body.name });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
+
 app.listen(port, () => {
   console.log(`running on ${port}`);
 });
