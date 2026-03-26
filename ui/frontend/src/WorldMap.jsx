@@ -30,7 +30,6 @@ export default function WorldMap({ coords, zoom, markers }) {
           maxZoom: 19,
           attribution:
             '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          paddingBottomRight: [400, 0],
         })
         .addTo(mapInstanceRef.current);
       markerLayerRef.current.addTo(mapInstanceRef.current);

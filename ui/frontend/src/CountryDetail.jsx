@@ -56,7 +56,6 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   return (
     <>
       <WorldMap coords={coords} zoom={zoom} markers={latLongArray} />
-
       <div className="banner">
         <Link
           to="/"
@@ -152,9 +151,11 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
             <Weather coords={coords} />
           </div>
 
+          {/* <Gallery query={`${countryData.name.common} scenery`}></Gallery> */}
+
           <div className="airport-section">
             <p>
-              <strong>Major Airports</strong>
+              <strong>MAJOR AIRPORTS</strong>
             </p>
             <div className="airport-scroll-area">
               {airports.map((airport) => (
