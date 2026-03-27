@@ -264,18 +264,51 @@ a {
   margin-bottom: 4px;
 }
 
+.airport-section {
+  margin: 10px -30px 20px -30px;
+}
+
+.airport-section > p {
+  padding-left: 30px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.airport-scroll-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 30px 20px 30px;
+
+  scrollbar-width: none;
+}
+
+.airport-scroll-area a {
+  text-decoration: none;
+  flex: 0 0 280px;
+  scroll-snap-align: center;
+  display: block;
+}
+
 .airport-card {
   background: white;
   border-radius: 16px;
   padding: 15px;
-  margin-bottom: 12px;
+  height: 100%;
   border: 1px solid #f0f0f0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease;
+  box-sizing: border-box;
+  text-align: left;
 }
 
 .airport-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   border-color: #007bff;
 }
@@ -284,6 +317,13 @@ a {
   color: #1a1a1a;
   display: block;
   margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+.airport-card p {
+  margin: 4px 0;
+  font-size: 0.85rem;
+  color: #666;
 }
 
 .flags {
