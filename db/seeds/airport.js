@@ -36,9 +36,7 @@ exports.seed = async function (knex) {
     }));
 
   if (filteredAirportData.length > 0) {
-    await batchInsert("airports", filteredAirportData, 200);
-    console.log(
-      `Successfully committed ${filteredAirportData.length} airports!`,
-    );
+    await knex.batchInsert("airports", filteredAirportData, 200);
+    console.log(`Successfully seeded ${filteredAirportData.length} airports!`);
   }
 };

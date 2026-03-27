@@ -26,7 +26,7 @@ export default function Graph({ countryData }) {
   return (
     <>
       <h1>
-        {gdpData.name} {gdpData.country_code}
+        {gdpData.name} {gdpData.country_code} {gdpData.gdp_2000}
       </h1>
     </>
   );
