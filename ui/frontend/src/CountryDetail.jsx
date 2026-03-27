@@ -12,6 +12,7 @@ import {
 import WorldMap from "./WorldMap";
 import { Weather } from "./Weather";
 import Gallery from "./Gallery";
+import Graph from "./GDP";
 
 export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   const [countryData, setCountryData] = useState(null);
@@ -176,6 +177,8 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
               ))}
             </div>
           </div>
+
+          <Graph countryData={countryData}></Graph>
         </div>
       )}
     </>

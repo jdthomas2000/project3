@@ -9,7 +9,7 @@ const { validateHeaderName } = require("http");
 const path = require("path");
 
 exports.seed = async function (knex) {
-  await knex("airports").del();
+  await knex("gdp").del();
 
   const myPath = path.join(__dirname, "../data/gdp.csv");
   let gdpData = [];

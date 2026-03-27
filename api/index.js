@@ -83,6 +83,16 @@ app.get("/gdp", async (req, res) => {
     res.status(500).send(err);
   }
 });
+app.get("/gdp/:country", async (req, res) => {
+  try {
+    const result = await db("gdp")
+      .select("*")
+      .where("country_code", "=", req.params.country.toUpperCase());
+    return res.status(200).json(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 app.listen(port, () => {
   console.log(`running on ${port}`);
