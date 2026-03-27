@@ -51,8 +51,6 @@ export default function Graph({ countryData }) {
     data.push(dataObj);
   }
 
-  // console.log(data);
-
   return (
     <div className="graph">
       <h3 className="graph-title">
