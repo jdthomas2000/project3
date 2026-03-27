@@ -496,3 +496,29 @@ a {
   background: none !important;
   border: none !important;
 }
+
+.graph {
+  width: 100%;
+  max-width: 700px;
+  border: 1px solid var(--color-border-2);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--color-surface-base);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  box-sizing: border-box;
+
+  margin: 0 auto;
+}
+
+.graph-title {
+  margin: 0 0 20px 0;
+  color: var(--color-text-1);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.chart-container {
+  width: 100%;
+  aspect-ratio: 1.618;
+}
