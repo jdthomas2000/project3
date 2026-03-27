@@ -69,7 +69,7 @@ export default function Graph({ countryData }) {
               stroke="var(--color-border-3)"
             />
 
-            <XAxis dataKey="year" stroke="var(--color-text-3)" />
+            <XAxis dataKey="year" stroke="var(--color-text-3)" interval={4} />
 
             <YAxis
               dataKey="gdp"
