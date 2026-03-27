@@ -88,7 +88,7 @@ export default function Graph({ countryData }) {
 
             <Line
               type="monotone"
-              dataKey="gdp" // Changed to lowercase "gdp"
+              dataKey="gdp"
               stroke="var(--color-chart-1)"
               dot={{ fill: "var(--color-surface-base)" }}
               activeDot={{ r: 8, stroke: "var(--color-surface-base)" }}
