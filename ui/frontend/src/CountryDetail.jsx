@@ -14,6 +14,7 @@ import { Weather } from "./Weather";
 import Gallery from "./Gallery";
 import Graph from "./GDP";
 import * as cookie from "cookie";
+import AirportData from "./AirportData";
 
 export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   const [countryData, setCountryData] = useState(null);
@@ -187,6 +188,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
                     <p>
                       Location: {airport.latitude_deg}, {airport.longitude_deg}
                     </p>
+                    <AirportData airport={airport}></AirportData>
                   </div>
                 </a>
               ))}
