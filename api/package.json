@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "knex": "^3.2.5",
@@ -12,8 +13,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
- "start": "npx knex migrate:latest  --knexfile /src/App/db/knexfile.js  --migrations-directory /src/App/db/migrations && npx knex seed:run  --knexfile /src/App/db/knexfile.js  &&  nodemon /src/App/api/index.js",
-  "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx knex migrate:latest  --knexfile /src/App/db/knexfile.js  --migrations-directory /src/App/db/migrations && npx knex seed:run  --knexfile /src/App/db/knexfile.js  &&  nodemon /src/App/api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

@@ -67,12 +67,34 @@ export default function Graph({ countryData }) {
               stroke="var(--color-border-3)"
             />
 
-            <XAxis dataKey="year" stroke="var(--color-text-3)" interval={4} />
+            <XAxis
+              dataKey="year"
+              stroke="var(--color-text-3)"
+              interval={5}
+              tick={{ fill: "var(--color-text-1)" }}
+              label={{
+                value: "Year",
+                position: "insideBottom",
+                fill: "var(--color-text-1)",
+                fontSize: 14,
+                fontWeight: 300,
+                offset: -5,
+              }}
+            />
 
             <YAxis
               dataKey="gdp"
               stroke="var(--color-text-3)"
+              tick={{ fill: "var(--color-text-1)" }}
               tickFormatter={(val) => compactFormatter.format(val)}
+              label={{
+                value: "GDP ($B)",
+                angle: -90,
+                position: "insideLeft",
+                fill: "var(--color-text-1)",
+                fontSize: 14,
+                fontWeight: 300,
+              }}
             />
 
             <Tooltip

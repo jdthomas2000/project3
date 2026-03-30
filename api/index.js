@@ -3,12 +3,14 @@ const knex = require("knex");
 const knexfile = require("../db/knexfile");
 const db = knex(knexfile.development);
 const cors = require("cors");
+var cookieParser = require("cookie-parser");
 
 var app = express();
 var port = 3000;
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.get("/", async (req, res) => {
   try {
@@ -21,6 +23,7 @@ app.get("/", async (req, res) => {
 app.get("/airports", async (req, res) => {
   try {
     const result = await db("airports").select("*");
+
     return res.status(200).json(result);
   } catch (err) {
     res.status(500).send(err);

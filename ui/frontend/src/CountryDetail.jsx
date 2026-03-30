@@ -13,12 +13,17 @@ import WorldMap from "./WorldMap";
 import { Weather } from "./Weather";
 import Gallery from "./Gallery";
 import Graph from "./GDP";
+import * as cookie from "cookie";
 
 export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   const [countryData, setCountryData] = useState(null);
   const [countryCode, setCountryCode] = useState(null);
   const [airports, setAirports] = useState([]);
   const [isShown, setIsShown] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    const cookies = cookie.parse(document.cookie);
+    return cookies.theme || "light";
+  });
 
   const { countryName } = useParams();
 
@@ -45,6 +50,15 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
       });
   }, [countryCode]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.cookie = `theme=${theme}`;
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((currTheme) => (currTheme === "light" ? "dark" : "light"));
+  };
+
   const latLongArray = airports.map((airport) => ({
     lat: airport.latitude_deg,
     lng: airport.longitude_deg,
@@ -68,6 +82,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
           <button>Home</button>
         </Link>
         <h1>{countryData.name.common.toUpperCase()}</h1>
+        <button onClick={toggleTheme}>Toggle Theme</button>
       </div>
 
       {!isShown && (
@@ -83,10 +98,10 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
           </button>
 
           <header>
-            <h1>
+            <h2>
               <strong>Official Name: </strong>
               {countryData.name.official}
-            </h1>
+            </h2>
             <h2>
               <strong>Capital:</strong> {countryData.capital[0]}
             </h2>

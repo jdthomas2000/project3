@@ -6,6 +6,19 @@ body,
   padding: 0;
   justify-content: center;
 }
+:root {
+  --color-surface-base: #ffffff;
+  --color-text-1: #1a1a1a;
+  --color-border-2: #e5e5e5;
+  --color-chart-1: #004d40;
+}
+
+[data-theme="dark"] {
+  --color-surface-base: #121212;
+  --color-text-1: #f5f5f5;
+  --color-border-2: #333333;
+  --color-chart-1: #81c784;
+}
 
 .region-card-container {
   display: flex;
@@ -141,6 +154,7 @@ body,
 .banner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 15px 30px;
   top: 0;
   width: 100%;
@@ -215,7 +229,9 @@ a {
   width: 380px;
   max-height: calc(100vh - 140px);
 
-  background: rgba(255, 255, 255, 0.85);
+  background-color: var(--color-surface-base);
+  border-left: 1px solid var(--color-border-2);
+  color: var(--color-text-1);
   backdrop-filter: blur(15px);
 
   border-radius: 28px;
@@ -237,7 +253,7 @@ a {
 .country-info-panel h1 {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #1a1a1a;
+  --color-text-1: #f5f5f5;
   margin: 0;
   letter-spacing: -0.5px;
 }
@@ -273,7 +289,7 @@ a {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #888;
+  --color-text-1: #f5f5f5;
   margin-bottom: 12px;
 }
 
@@ -296,7 +312,9 @@ a {
 }
 
 .airport-card {
-  background: white;
+  background-color: var(--color-surface-base);
+  border-left: 1px solid var(--color-border-2);
+  color: var(--color-text-1);
   border-radius: 16px;
   padding: 15px;
   height: 100%;
@@ -314,7 +332,7 @@ a {
 }
 
 .airport-card strong {
-  color: #1a1a1a;
+  --color-text-1: #f5f5f5;
   display: block;
   margin-bottom: 5px;
   font-size: 0.95rem;
@@ -323,7 +341,7 @@ a {
 .airport-card p {
   margin: 4px 0;
   font-size: 0.85rem;
-  color: #666;
+  --color-text-1: #f5f5f5;
 }
 
 .flags {
@@ -456,7 +474,7 @@ a {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: black;
+  --color-text-1: #f5f5f5;
   margin-bottom: 15px;
   padding-left: 5px;
 }
@@ -500,25 +518,27 @@ a {
 .graph {
   width: 100%;
   max-width: 700px;
+  height: auto;
   border: 1px solid var(--color-border-2);
   border-radius: 8px;
   padding: 20px;
   background-color: var(--color-surface-base);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   box-sizing: border-box;
+  color: var(--color-text-1);
 
   margin: 0 auto;
 }
 
 .graph-title {
   margin: 0 0 20px 0;
-  color: var(--color-text-1);
+  --color-text-1: #f5f5f5;
   font-size: 1.2rem;
   text-align: center;
 }
 
 .chart-container {
   width: 100%;
+
   aspect-ratio: 1.618;
 }

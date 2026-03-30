@@ -13,11 +13,13 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.8",
+    "@recharts/devtools": "^0.0.11",
     "leaflet": "^1.9.4",
     "openmeteo": "^1.2.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.1",
+    "recharts": "^3.8.1",
     "weather-icons-react": "^1.2.0"
   },
   "devDependencies": {
