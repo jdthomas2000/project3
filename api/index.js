@@ -97,6 +97,29 @@ app.get("/gdp/:country", async (req, res) => {
   }
 });
 
+app.get("/flights", async (req, res) => {
+  try {
+    const result = await db("flights").select("*");
+
+    return res.status(200).json(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get("/flights/:airport", async (req, res) => {
+  try {
+    const result = await db("flights")
+      .select("*")
+      .where("dep_iata", "=", req.params.airport.toUpperCase())
+      .orWhere("arr_iata", "=", req.params.airport.toUpperCase())
+      .limit(3);
+    return res.status(200).json(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`running on ${port}`);
 });
