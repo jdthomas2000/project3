@@ -175,7 +175,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
             <Weather coords={coords} />
           </div>
 
-          {/* <Gallery query={`${countryData.name.common} scenery`}></Gallery> */}
+          <Gallery query={`${countryData.name.common} scenery`}></Gallery>
 
           <div className="airport-section">
             <p>

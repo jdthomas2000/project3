@@ -229,7 +229,7 @@ a {
   top: 100px;
   right: 25px;
   width: 380px;
-  max-height: calc(100vh - 140px);
+  max-height: calc(100vh - 200px);
 
   background-color: var(--color-surface-base);
   border-left: 1px solid var(--color-border-2);
@@ -696,6 +696,18 @@ a {
 }
 
 .flight-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.map-nav-btn {
   background-color: #3498db;
   color: white;
   border: none;
