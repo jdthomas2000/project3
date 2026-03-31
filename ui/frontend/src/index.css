@@ -542,3 +542,99 @@ a {
 
   aspect-ratio: 1.618;
 }
+
+.airport-data-container {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  --color-border-2: #e5e5e5;
+}
+
+.flight-section-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  --color-text-1: #1a1a1a;
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.flight-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  align-items: center;
+  padding: 0.6rem 0;
+  --color-border-2: #e5e5e5;
+  transition: background-color 0.2s ease;
+}
+
+.flight-row:hover {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+.flight-row:last-child {
+  border-bottom: none;
+}
+
+.flight-id-col,
+.flight-time-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 120px;
+}
+
+.flight-number {
+  font-weight: 700;
+  font-size: 0.85rem;
+  --color-border-2: #e5e5e5;
+}
+
+.airline-name {
+  font-size: 0.6rem;
+  --color-border-2: #e5e5e5;
+  white-space: normal;
+  line-height: 1.2;
+  word-wrap: break-word;
+  margin-top: 2px;
+  display: block;
+}
+
+.flight-route-col {
+  text-align: center;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.route-arrow {
+  margin: 0 0.4rem;
+  --color-border-2: #e5e5e5;
+}
+
+.iata-code {
+  font-weight: 600;
+  --color-border-2: #e5e5e5;
+}
+
+.flight-time-col {
+  text-align: right;
+}
+
+.departure-time {
+  font-weight: 700;
+  font-size: 0.85rem;
+  --color-border-2: #e5e5e5;
+}
+
+.arrival-meta {
+  font-size: 0.65rem;
+  --color-border-2: #e5e5e5;
+}
+
+.flight-loader,
+.flight-empty {
+  font-size: 0.75rem;
+  --color-border-2: #e5e5e5;
+  font-style: italic;
+  padding: 1rem 0;
+  text-align: center;
+}

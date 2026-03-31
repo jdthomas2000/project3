@@ -4,26 +4,51 @@
  */
 
 const { faker } = require("@faker-js/faker");
+const fs = require("fs");
+const path = require("path");
+const { parse } = require("csv-parse/sync");
 
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("flights").del();
   let flights_data = [];
 
+  const myPath = path.join(__dirname, "../data/airports.csv");
+  let airportData = [];
+
+  const content = fs.readFileSync(myPath, "utf-8");
+
+  airportData = parse(content, {
+    columns: true,
+    skip_empty_lines: true,
+    trim: true,
+  });
+
+  const filteredAirportData = airportData
+    .filter(
+      (airport) => airport.type === "large_airport" && airport.wikipedia_link,
+    )
+    .map((airport) => ({
+      name: airport.name,
+      iata_code: airport.iata_code,
+    }));
+
   for (let i = 0; i < 10000; i++) {
+    let randArrival = Math.floor(Math.random() * (1192 - 0 + 1));
+    let randDeparture = Math.floor(Math.random() * (1192 - 0 + 1));
     let departure_time = faker.date.soon().toISOString();
-    const rawDepAirport = faker.airline.airport();
-    const rawArrAirport = faker.airline.airport();
+    const rawDepAirport = filteredAirportData[randDeparture];
+    const rawArrAirport = filteredAirportData[randArrival];
 
     const rawAirline = faker.airline.airline();
 
     const depAirport = {
       name: rawDepAirport.name,
-      iata: rawDepAirport.iataCode,
+      iata: rawDepAirport.iata_code,
     };
     const arrAirport = {
       name: rawArrAirport.name,
-      iata: rawArrAirport.iataCode,
+      iata: rawArrAirport.iata_code,
     };
 
     const airline = {

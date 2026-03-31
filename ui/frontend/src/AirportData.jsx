@@ -69,46 +69,48 @@ export default function AirportData({ airport }) {
   }, [airport.iata_code]);
 
   if (!flights || flights.length === 0) {
-    return <p>No flights found for {airport.iata_code}</p>;
+    return <p>No active flights found for {airport.iata_code}</p>;
   }
   // if (!arrFlights) return <h1>data loading... or missing maybe</h1>;
 
   return (
-    <div>
-      {flights.map((flight) => (
-        <div key={flight.id}>
-          <div>
-            {" "}
-            Flight Info
-            <p>
-              Airline {flight.airline.iata} - {flight.airline.name}
-              Flight Number: {flight.flight_number}
-            </p>
-            Departure Info
-            <p>
-              Departing Airport: {flight.departing_airport.name}{" "}
-              {flight.departing_airport.iata}{" "}
-            </p>
-            <p>
-              {new Date(flight.departure_time).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </p>
-            Arrival Info
-            <p>
-              Arrival Airport: {flight.arrival_airport.name}{" "}
-              {flight.arrival_airport.iata}
-            </p>
-            <p>
-              {new Date(flight.estimtated_arrival_time).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </p>
+    <div className="airport-data-container">
+      <h5 className="flight-section-title">Live Flights</h5>
+      <div className="flight-list">
+        {flights.map((flight) => (
+          <div key={flight.id} className="flight-row">
+            <div className="flight-id-col">
+              <span className="flight-number">
+                {flight.airline.iata}
+                {flight.flight_number}
+              </span>
+              <span className="airline-name">{flight.airline.name}</span>
+            </div>
+
+            <div className="flight-route-col">
+              <span className="iata-code">{flight.departing_airport.iata}</span>
+              <span className="route-arrow">→</span>
+              <span className="iata-code">{flight.arrival_airport.iata}</span>
+            </div>
+
+            <div className="flight-time-col">
+              <span className="departure-time">
+                {new Date(flight.departure_time).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+              <span className="arrival-meta">
+                Arr:{" "}
+                {new Date(flight.estimtated_arrival_time).toLocaleTimeString(
+                  [],
+                  { hour: "2-digit", minute: "2-digit" },
+                )}
+              </span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
