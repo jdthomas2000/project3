@@ -1,5 +1,15 @@
 import { useRef, useEffect } from "react";
 import leaflet from "leaflet";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  data,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 
 const icon = leaflet.divIcon({
   html: `
@@ -14,10 +24,17 @@ const icon = leaflet.divIcon({
   iconAnchor: [12, 12],
 });
 
-export default function WorldMap({ coords, zoom, markers }) {
+export default function WorldMap({
+  coords,
+  zoom,
+  markers,
+  setZoom,
+  setCoords,
+}) {
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markerLayerRef = useRef(leaflet.layerGroup());
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!mapInstanceRef.current) {
@@ -52,13 +69,40 @@ export default function WorldMap({ coords, zoom, markers }) {
             leaflet
               .marker([mark.lat, mark.lng], { icon: icon })
               .bindPopup(
-                `<a href="${mark.wikipedia_link}" target="_blank" rel="noopener noreferrer">${mark.name}</a>`,
+                `<button class = "map-nav-btn" data-iata="${mark.iata}" data-lat="${mark.lat}" 
+                   data-lng="${mark.lng}">
+                   View Flights for ${mark.name}
+                 </button>`,
               )
               .addTo(markerLayerRef.current);
           }
         });
+        const handlePopupOpen = (e) => {
+          const btn = e.popup._contentNode.querySelector(".map-nav-btn");
+          if (btn) {
+            btn.onclick = () => {
+              const iata = btn.getAttribute("data-iata");
+              const lat = parseFloat(btn.getAttribute("data-lat"));
+              const lng = parseFloat(btn.getAttribute("data-lng"));
+
+              if (setCoords && setZoom) {
+                setZoom(14);
+                setCoords([lat, lng]);
+                navigate(`/flights/all/${iata}`);
+              }
+            };
+          }
+        };
+
+        mapInstanceRef.current.on("popupopen", handlePopupOpen);
+
+        return () => {
+          if (mapInstanceRef.current) {
+            mapInstanceRef.current.off("popupopen", handlePopupOpen);
+          }
+        };
       }
     }
-  }, [markers]);
+  }, [markers, navigate, setCoords, setZoom]);
   return <div className="map" ref={mapContainerRef}></div>;
 }

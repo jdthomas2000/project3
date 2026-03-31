@@ -64,7 +64,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   const latLongArray = airports.map((airport) => ({
     lat: airport.latitude_deg,
     lng: airport.longitude_deg,
-    wikipedia_link: airport.wikipedia_link,
+    iata: airport.iata_code,
     name: airport.name,
   }));
 
@@ -72,7 +72,13 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
 
   return (
     <>
-      <WorldMap coords={coords} zoom={zoom} markers={latLongArray} />
+      <WorldMap
+        coords={coords}
+        zoom={zoom}
+        markers={latLongArray}
+        setZoom={setZoom}
+        setCoords={setCoords}
+      />
       <div className="banner">
         <Link
           to="/"
@@ -194,7 +200,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
                     <button
                       className="flight-button"
                       onClick={() => {
-                        setZoom(15);
+                        setZoom(14);
                         setCoords([
                           airport.latitude_deg,
                           airport.longitude_deg,

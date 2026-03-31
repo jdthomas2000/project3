@@ -44,7 +44,13 @@ export default function Flights({ setCoords, setZoom, coords, zoom }) {
 
   return (
     <>
-      <WorldMap coords={coords} zoom={zoom} markers={marker} />
+      <WorldMap
+        coords={coords}
+        zoom={zoom}
+        markers={marker}
+        setCoords={setCoords}
+        setZoom={setZoom}
+      />
       <div className="banner">
         <Link
           to="/"
