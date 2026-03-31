@@ -37,8 +37,20 @@ export default function Flights({ setCoords, setZoom, coords, zoom }) {
 
   if (!flights) return <h1>No Flights Avail</h1>;
 
-  const departures = flights.filter((flight) => flight.dep_iata === iata);
-  const arrivals = flights.filter((flight) => flight.arr_iata === iata);
+  const departures = [
+    ...flights
+      .filter((flight) => flight.dep_iata === iata)
+      .sort((a, b) => new Date(a.departure_time) - new Date(b.departure_time)),
+  ];
+  const arrivals = [
+    ...flights
+      .filter((flight) => flight.arr_iata === iata)
+      .sort(
+        (a, b) =>
+          new Date(a.estimtated_arrival_time) -
+          new Date(b.estimtated_arrival_time),
+      ),
+  ];
 
   const airportName = arrivals[0].arrival_airport.name;
 
@@ -149,6 +161,15 @@ export default function Flights({ setCoords, setZoom, coords, zoom }) {
 
                     <div className="flight-time-col">
                       <span className="departure-time">
+                        {new Date(
+                          flight.estimtated_arrival_time,
+                        ).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </span>
+                      <span className="arrival-meta">
+                        Dep:{" "}
                         {new Date(flight.departure_time).toLocaleTimeString(
                           [],
                           {
@@ -156,15 +177,6 @@ export default function Flights({ setCoords, setZoom, coords, zoom }) {
                             minute: "2-digit",
                           },
                         )}
-                      </span>
-                      <span className="arrival-meta">
-                        Arr:{" "}
-                        {new Date(
-                          flight.estimtated_arrival_time,
-                        ).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
                       </span>
                     </div>
                   </div>
