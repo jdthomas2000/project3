@@ -12,6 +12,7 @@ import Home from "./Home";
 import RegionDetail from "./RegionDetail";
 import CountryDetail from "./CountryDetail";
 import WorldMap from "./WorldMap";
+import Flights from "./Flights";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -66,6 +67,17 @@ function App() {
               coords={coords}
               zoom={zoom}
             ></CountryDetail>
+          }
+        ></Route>
+        <Route
+          path="/flights/all/:iata"
+          element={
+            <Flights
+              coords={coords}
+              setCoords={setCoords}
+              zoom={zoom}
+              setZoom={setZoom}
+            ></Flights>
           }
         ></Route>
       </Routes>

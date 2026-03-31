@@ -120,6 +120,19 @@ app.get("/flights/:airport", async (req, res) => {
   }
 });
 
+app.get("/flights/all/:airport", async (req, res) => {
+  try {
+    const result = await db("flights")
+      .select("*")
+      .where("dep_iata", "=", req.params.airport.toUpperCase())
+      .orWhere("arr_iata", "=", req.params.airport.toUpperCase());
+
+    return res.status(200).json(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`running on ${port}`);
 });

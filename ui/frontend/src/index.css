@@ -2,6 +2,7 @@ html,
 body,
 #root {
   height: 100%;
+  width: 99%;
   margin: 0;
   padding: 0;
   justify-content: center;
@@ -167,7 +168,8 @@ body,
 
 .banner h1 {
   position: absolute;
-  left: 40%;
+  left: 50%;
+  transform: translateX(-50%);
   margin: 0;
   pointer-events: none;
   margin: 0;
@@ -563,8 +565,8 @@ a {
   grid-template-columns: 1.2fr 1fr 1fr;
   align-items: center;
   padding: 0.6rem 0;
-  --color-border-2: #e5e5e5;
   transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--color-border-2);
 }
 
 .flight-row:hover {
@@ -586,12 +588,12 @@ a {
 .flight-number {
   font-weight: 700;
   font-size: 0.85rem;
-  --color-border-2: #e5e5e5;
+  color: var(--color-text-1);
 }
 
 .airline-name {
   font-size: 0.6rem;
-  --color-border-2: #e5e5e5;
+  color: var(--color-text-1);
   white-space: normal;
   line-height: 1.2;
   word-wrap: break-word;
@@ -637,4 +639,70 @@ a {
   font-style: italic;
   padding: 1rem 0;
   text-align: center;
+}
+
+.page-foreground {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.flight-board {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.board-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.column-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.15rem;
+  background: var(--color-chart-1);
+  color: var(--color-surface-base);
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.flights-container {
+  position: fixed;
+  top: 10;
+  left: 0;
+  width: 450px;
+  height: 80vh;
+  pointer-events: auto;
+  background: var(--color-surface-base);
+  color: var(--color-text-1);
+  border: 1px solid var(--color-border-2);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+
+  margin: 20px auto;
+  overflow-y: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.flight-row {
+  grid-template-columns: 1fr 1fr 1.2fr;
+  font-size: 0.75rem;
+}
+
+.flight-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

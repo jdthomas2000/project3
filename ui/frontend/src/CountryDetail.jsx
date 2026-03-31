@@ -27,6 +27,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
   });
 
   const { countryName } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
@@ -176,7 +177,7 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
             </p>
             <div className="airport-scroll-area">
               {airports.map((airport) => (
-                <a href={airport.wikipedia_link} target="_blank">
+                <a>
                   <div
                     key={airport.iata_code || airport.name}
                     className="airport-card"
@@ -189,6 +190,20 @@ export default function CountryDetail({ setCoords, setZoom, coords, zoom }) {
                       Location: {airport.latitude_deg}, {airport.longitude_deg}
                     </p>
                     <AirportData airport={airport}></AirportData>
+
+                    <button
+                      className="flight-button"
+                      onClick={() => {
+                        setZoom(15);
+                        setCoords([
+                          airport.latitude_deg,
+                          airport.longitude_deg,
+                        ]);
+                        navigate(`/flights/all/${airport.iata_code}`);
+                      }}
+                    >
+                      See All
+                    </button>
                   </div>
                 </a>
               ))}
