@@ -47,10 +47,10 @@ export default function Home({
         <h1> Jacob's World Wide Web</h1>
       </div>
       <WorldMap zoom={zoom} coords={coords}></WorldMap>
-      <div>
+      {/* <div>
         <h2>Author:</h2>
         <h3>Jacob Thomas</h3>
-      </div>
+      </div> */}
       {/* <div>
         <h1>Airport Info</h1>
         {airportList.map((airport) => {

@@ -100,7 +100,7 @@ body,
   top: 0;
   left: 0;
   transition: width 0.5s;
-  /* z-index: -1; */
+  /* z-index: 0; */
 }
 .map-container.sidebar-open {
   width: calc(100vw - 400px);
@@ -159,11 +159,12 @@ body,
   padding: 15px 30px;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 10;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .banner h1 {
